@@ -1,6 +1,4 @@
-const path = location.hostname === "localhost"
-  ? "http://localhost:3000"
-  : "https://api.deinedomain.de";
+const path = "http://localhost:3000";
 
   async function fetchTSV(url) {
   const res = await fetch(url);

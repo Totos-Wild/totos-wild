@@ -1,15 +1,12 @@
-const path = "http://localhost:3000";
-
-  async function fetchTSV(url) {
-  const res = await fetch(url);
-  const tsvText = await res.text();
-  const lines = tsvText.trim().split("\n");
-  const headers = lines.shift().split("\t").map(h => h.trim());
-  return lines.map(line => Object.fromEntries(headers.map((h, i) => [h, line.split("\t")[i]?.trim()])));
+async function loadData(typ) {
+  const piUrl = "https://www-totos-wild-und-honig-de.k2x1vmwia2xhdx8w.myfritz.net";
+  const response = await fetch(`${piUrl}?typ=${typ}`);
+  const daten = await response.json();
+  return daten;
 }
 
 async function TestServerCall() {
-  const response = await fetch(path + "/test");
+  const response = await fetch(piUrl + "/test");
   const data = await response.json();
   console.log(data);
 }

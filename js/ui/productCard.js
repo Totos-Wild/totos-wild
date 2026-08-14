@@ -75,7 +75,7 @@ function createOfferSelectionControl(offer, product) {
   offerDiv.innerHTML = `
     <div class="selection-text">
       <span class="offer-label">${offer.variant}:</span>
-      <span class="offer-price">${offer.price}${product.priceType}</span>
+      <span class="offer-price">${offer.price.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
     </div>
     <div class="selection-buttons">
       <button class="minus-btn hidden">-</button>
@@ -131,7 +131,7 @@ function createPositionSelectorButton(product) {
     ${product.weightRange
       ? `<span class="offer-label">${product.weightRange}:</span>`
       : ``}
-    <span class="offer-price">${product.weightPrice}${product.priceType}</span>
+    <span class="offer-price">${product.weightPrice.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
   `;
 
   const hasSelections = Array.isArray(product.positions) && product.positions.length > 0;

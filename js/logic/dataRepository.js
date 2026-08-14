@@ -1,8 +1,8 @@
 async function loadCategories() {
-  const productsRaw = await loadData("products");
-  const offersRaw = await loadData("offers");
-  const positionsRaw = await loadData("positions");
-  const categoriesRaw = await loadData("categories");
+  const productsRaw = await loadData("Produkte");
+  const offersRaw = await loadData("Angebote");
+  const positionsRaw = await loadData("Positionen");
+  const categoriesRaw = await loadData("Kategorien");
 
   const productsEmpty = productsRaw.map(d => new Product(d));
   const offers = offersRaw.map(d => new Offer(d));

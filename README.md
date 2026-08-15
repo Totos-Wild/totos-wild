@@ -3,7 +3,7 @@
 ## https://totos-wild.github.io/totos-wild/
 
 ## QR Code
-![QR Code](qr-code.png)
+![QR Code](images/qr-code.png "QR Code")
 
 ## TODO
 - E-Mail Automatisierung 

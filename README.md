@@ -1,6 +1,9 @@
 # TotosWild
 
-- TODO
-- QR Code
+### TODO
 - E-Mail Automatisierung 
-- bestellte Produkte
+  - cd /pfad/zu/totos-wild-server
+  - composer require phpmailer/phpmailer
+  - App-Passwort bei web.de erstellen
+  - App-Passwort permanent in ~/.bashrc oder /etc/environment hinzufügen
+- bestellte Produkte auto reservieren

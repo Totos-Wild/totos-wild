@@ -1,4 +1,4 @@
-import { parseNumber, formatter } from '../utils/parse.js';
+import { parseNumber, formatNumber } from '../utils/parse.js';
 import { Offer } from '../dataclasses/offer.js';
 import { Product } from '../dataclasses/product.js';
 import { Position } from '../dataclasses/position.js';
@@ -21,7 +21,7 @@ class CartState {
         const totalPrice = parseNumber(offer.price) * amount;
         totalOrderPrice += totalPrice;
 
-        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amount}x${offer.price}€ = ${formatter.format(totalPrice)}€`;
+        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amount}x${offer.price}€ = ${formatNumber(totalPrice)}€`;
       });
 
     const positionLines = Array.from(this.selectedPositions.entries())
@@ -40,7 +40,7 @@ class CartState {
     if (noProducts) {
       productList = "Keine Produkte ausgewählt.";
     } else {
-      productList += `\n\nGesamtpreis: ${formatter.format(totalOrderPrice)}€`;
+      productList += `\n\nGesamtpreis: ${formatNumber(totalOrderPrice)}€`;
     }
 
     return productList;

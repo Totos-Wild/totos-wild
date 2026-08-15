@@ -1,5 +1,5 @@
 import { cartState } from '../logic/cartLogic.js';
-import { parseNumber, formatter, truncate } from '../utils/parse.js';
+import { parseNumber, formatNumber, truncate } from '../utils/parse.js';
 import { createMailBody, sendTemplateMail } from '../logic/mail.js';
 
 let escHandler;
@@ -290,7 +290,7 @@ function renderCartItems(productMap) {
       createCartRow(
         `${product.name} (${offer.variant})`,
         `${amount} × ${offer.price}€`,
-        `${formatter.format(price)}€`,
+        `${formatNumber(price)}€`,
         () => {
           cartState.selectedOffers.delete(offer);
           renderCartItems(productMap);
@@ -341,7 +341,7 @@ function renderCartItems(productMap) {
   updateSubmitButtonState();
   totalDiv.textContent = container.children.length === 0
     ? "Keine Produkte ausgewählt."
-    : `Gesamtpreis: ${formatter.format(total)}€`;
+    : `Gesamtpreis: ${formatNumber(total)}€`;
 }
 
 function createCartRow(name, info, price, onRemove) {

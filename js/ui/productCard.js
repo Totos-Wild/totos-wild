@@ -1,6 +1,6 @@
 import { cartState } from '../logic/cartLogic.js';
 import { showImageOverlay, showPositionSelection, showRequestForm } from './overlay.js';
-import { formatter } from '../utils/parse.js';
+import { formatNumber } from '../utils/parse.js';
 
 export function buildProductCard(product) {
   const div = CreateProductCardDiv(product);
@@ -79,7 +79,7 @@ function createOfferSelectionControl(offer, product) {
   offerDiv.innerHTML = `
     <div class="selection-text">
       <span class="offer-label">${offer.variant}:</span>
-      <span class="offer-price">${formatter.format(offer.price)}€</span>
+      <span class="offer-price">${formatNumber(offer.price)}€</span>
     </div>
     <div class="selection-buttons">
       <button class="minus-btn hidden">-</button>
@@ -135,7 +135,7 @@ function createPositionSelectorButton(product) {
     ${product.weightRange
       ? `<span class="offer-label">${product.weightRange}:</span>`
       : ``}
-    <span class="offer-price">${formatter.format(product.weightPrice)}€/kg</span>
+    <span class="offer-price">${formatNumber(product.weightPrice)}€/kg</span>
   `;
 
   const hasSelections = Array.isArray(product.positions) && product.positions.length > 0;

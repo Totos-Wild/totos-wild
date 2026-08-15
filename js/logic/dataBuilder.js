@@ -1,4 +1,4 @@
-function fillProducts(products, offers, positions) {
+export function fillProducts(products, offers, positions) {
   const productMap = new Map(products.map(p => [p.id, p]));
 
   for (const offer of offers) {
@@ -14,7 +14,7 @@ function fillProducts(products, offers, positions) {
   return products;
 }
 
-function fillCategoriesWithProducts(categories, products) {
+export function fillCategoriesWithProducts(categories, products) {
   const categoryMap = new Map(
     categories.map(c => [c.name, c])
   );

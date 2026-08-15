@@ -1,3 +1,7 @@
+import { loadCategories } from '../logic/dataRepository.js';
+import { buildProductCard } from './productCard.js';
+import { showCartForm, showImpressum } from './overlay.js';
+
 function renderProductCategories(container, categories) {
   categories.forEach(category => {
     const h2 = document.createElement("h2");
@@ -18,7 +22,7 @@ function renderProductCategories(container, categories) {
   });
 }
 
-async function initializeProductPage() {
+export async function initializeProductPage() {
   const loader = document.getElementById("loader");
   loader.classList.remove("hidden");
   const container = document.getElementById("product-container");

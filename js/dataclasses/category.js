@@ -1,4 +1,4 @@
-class Category {
+export class Category {
   /** @type {string} */
   name;
   /** @type {string} */

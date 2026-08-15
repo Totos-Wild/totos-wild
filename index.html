@@ -6,7 +6,7 @@
   <title>Totos Wild</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--<link rel="stylesheet" href="style.css?v=0.0.2">-->
-  <!--TODO Nach Testen auf statisch wechseln-->
+  <!--TODO Nach Testen auf versionen wechseln-->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="shortcut icon" type="image/png" href="images/favicon.png">
   <!-- Optional: als Shortcut Icon für ältere Browser -->
@@ -38,49 +38,21 @@
   </footer>
 
   <!--<script src="script.js?v=0.0.2"></script>-->
-  <!--TODO Nach Testen auf statisch wechseln-->
+  <!--TODO Nach Testen auf versionen wechseln-->
 
   <script>
     /*TODO Nach Testen löschen*/
     const timestamp = new Date().getTime();
 
-    function loadScript(src) {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = src + "?v=" + timestamp;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.body.appendChild(script);
-      });
-    }
-
-    // CSS dynamisch laden
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "css/style.css?v=" + timestamp;
     document.head.appendChild(link);
 
-    // JS dynamisch laden
-    (async () => {
-      try {
-        await loadScript("js/dataclasses/position.js");
-        await loadScript("js/dataclasses/offer.js");
-        await loadScript("js/dataclasses/product.js");
-        await loadScript("js/dataclasses/category.js");
-        await loadScript("js/utils/parse.js");
-        await loadScript("js/logic/fetch.js");
-        await loadScript("js/logic/mail.js");
-        await loadScript("js/logic/dataBuilder.js");
-        await loadScript("js/logic/dataRepository.js");
-        await loadScript("js/logic/cartLogic.js");
-        await loadScript("js/ui/overlay.js");
-        await loadScript("js/ui/productCard.js");
-        await loadScript("js/ui/productPage.js");
-        await loadScript("js/main.js");
-      } catch (err) {
-        console.error("Fehler beim Laden der Skripte", err);
-      }
-    })();
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "js/main.js?v=" + timestamp;
+    document.body.appendChild(script);
   </script>
 
 </body>

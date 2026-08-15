@@ -1,4 +1,4 @@
-class Offer {
+export class Offer {
   /** @type {number} */
   productId;
   /** @type {string} */

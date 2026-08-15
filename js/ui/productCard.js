@@ -1,4 +1,8 @@
-function buildProductCard(product) {
+import { cartState } from '../logic/cartLogic.js';
+import { showImageOverlay, showPositionSelection, showRequestForm } from './overlay.js';
+import { formatter } from '../utils/parse.js';
+
+export function buildProductCard(product) {
   const div = CreateProductCardDiv(product);
   const contentDiv = createProductContent(product);
   div.appendChild(contentDiv);
@@ -75,7 +79,7 @@ function createOfferSelectionControl(offer, product) {
   offerDiv.innerHTML = `
     <div class="selection-text">
       <span class="offer-label">${offer.variant}:</span>
-      <span class="offer-price">${offer.price.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
+      <span class="offer-price">${formatter.format(offer.price)}€</span>
     </div>
     <div class="selection-buttons">
       <button class="minus-btn hidden">-</button>
@@ -97,23 +101,23 @@ function setupOfferButtons(offer, offerDiv) {
   plusBtn.style.backgroundColor = getColor(offer.amount, offer.threshold);
 
   plusBtn.addEventListener("click", () => {
-    const currentAmount = selectedOffers.get(offer) || 0;
+    const currentAmount = cartState.selectedOffers.get(offer) || 0;
     const newAmount = currentAmount + 1;
-    selectedOffers.set(offer, newAmount);
+    cartState.selectedOffers.set(offer, newAmount);
     countSpan.textContent = newAmount;
     minusBtn.classList.remove("hidden");
   });
 
   minusBtn.addEventListener("click", () => {
-    const currentAmount = selectedOffers.get(offer) || 0;
+    const currentAmount = cartState.selectedOffers.get(offer) || 0;
     if (currentAmount <= 0) return;
 
     const newAmount = currentAmount - 1;
 
     if (newAmount > 0) {
-      selectedOffers.set(offer, newAmount);
+      cartState.selectedOffers.set(offer, newAmount);
     } else {
-      selectedOffers.delete(offer);
+      cartState.selectedOffers.delete(offer);
       minusBtn.classList.add("hidden");
     }
 
@@ -131,7 +135,7 @@ function createPositionSelectorButton(product) {
     ${product.weightRange
       ? `<span class="offer-label">${product.weightRange}:</span>`
       : ``}
-    <span class="offer-price">${product.weightPrice.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
+    <span class="offer-price">${formatter.format(product.weightPrice)}€/kg</span>
   `;
 
   const hasSelections = Array.isArray(product.positions) && product.positions.length > 0;

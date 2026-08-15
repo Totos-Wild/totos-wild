@@ -1,11 +1,11 @@
-function sendTemplateMail(body) {
+export function sendTemplateMail(body) {
   const subject = encodeURIComponent("Bestellung bei Toto's Wild & Honig");
   const mailto = `mailto:totos-wild@web.de?subject=${subject}&body=${body}`;
 
   window.location.href = mailto;
 }
 
-function createMailBody(name, dateInput, productList, requestList) {
+export function createMailBody(name, dateInput, productList, requestList) {
   const date = new Date(dateInput);
   const formattedDate = new Intl.DateTimeFormat('de-DE').format(date);
   

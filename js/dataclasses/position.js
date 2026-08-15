@@ -1,4 +1,4 @@
-class Position {
+export class Position {
   /** @type {number} */
   productId;
   /** @type {string} */

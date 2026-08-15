@@ -1,6 +1,10 @@
+import { cartState } from '../logic/cartLogic.js';
+import { parseNumber, formatter, truncate } from '../utils/parse.js';
+import { createMailBody, sendTemplateMail } from '../logic/mail.js';
+
 let escHandler;
 
-function showImageOverlay(src) {
+export function showImageOverlay(src) {
   const overlay = document.createElement("div");
   overlay.id = "image-overlay";
   overlay.className = "popup-overlay";
@@ -45,7 +49,7 @@ function createCloseHandler(overlay, onCloseEvent = null) {
   };
 }
 
-function showPositionSelection(product) {
+export function showPositionSelection(product) {
   const overlay = document.createElement("div");
   overlay.classList.add("popup-overlay");
 
@@ -88,7 +92,7 @@ function showPositionSelection(product) {
       updateSelectionButton(button, product, position);
 
       button.addEventListener("click", () => {
-        togglePositionSelection(product, position);
+        cartState.togglePositionSelection(product, position);
         updateSelectionButton(button, product, position);
       });
     });
@@ -96,8 +100,8 @@ function showPositionSelection(product) {
 
 function updateSelectionButton(button, product, position) {
   const isSelected =
-    selectedPositions.has(product) &&
-    selectedPositions.get(product).has(position);
+    cartState.selectedPositions.has(product) &&
+    cartState.selectedPositions.get(product).has(position);
 
   if (isSelected) {
     button.textContent = "-";
@@ -112,7 +116,7 @@ function updateSelectionButton(button, product, position) {
   }
 }
 
-function showRequestForm(product) {
+export function showRequestForm(product) {
   const overlay = document.createElement("div");
   overlay.id = "request-form-overlay";
   overlay.className = "popup-overlay";
@@ -120,18 +124,18 @@ function showRequestForm(product) {
     <div class="overlay-content">
     <h2>Anfrage</h2>
     <label>Bemerkung:</label>
-    <textarea id="request-textarea" placeholder="Anzahl, Gewicht, Wünsche, Anmerkungen, etc." required>${selectedRequests.get(product) ?? ""}</textarea>
+    <textarea id="request-textarea" placeholder="Anzahl, Gewicht, Wünsche, Anmerkungen, etc." required>${cartState.selectedRequests.get(product) ?? ""}</textarea>
     <button class="button-default" id="close-request-form-overlay">Schließen</button>
     </div>
   `;
 
   document.body.appendChild(overlay);
-  const closeEvent = createCloseHandler(overlay, () => saveRequestText(overlay.querySelector("#request-textarea").value, product))
+  const closeEvent = createCloseHandler(overlay, () => cartState.saveRequestText(overlay.querySelector("#request-textarea").value, product))
   const closeButton = overlay.querySelector("#close-request-form-overlay");
   bindCloseEvents(overlay, closeEvent, closeButton);
 }
 
-function showImpressum() {
+export function showImpressum() {
   const overlay = document.createElement("div");
   overlay.id = "impressum-overlay";
   overlay.className = "popup-overlay";
@@ -222,7 +226,7 @@ function showPrivacyPolicy() {
   bindCloseEvents(overlay, closeEvent, closeButton);
 }
 
-function showCartForm(productMap) {
+export function showCartForm(productMap) {
   const overlay = document.createElement("div");
   overlay.id = "cart-overlay";
   overlay.className = "popup-overlay";
@@ -267,7 +271,7 @@ function showCartForm(productMap) {
 
 function updateSubmitButtonState() {
   const submitBtn = document.getElementById("submit-order-btn");
-  submitBtn.disabled = IsSelectionEmpty();
+  submitBtn.disabled = cartState.isSelectionEmpty();
 }
 
 function renderCartItems(productMap) {
@@ -277,7 +281,7 @@ function renderCartItems(productMap) {
   container.innerHTML = "";
   let total = 0;
 
-  for (const [offer, amount] of selectedOffers.entries()) {
+  for (const [offer, amount] of cartState.selectedOffers.entries()) {
     const product = productMap.get(offer.productId);
     const price = parseNumber(offer.price) * amount;
     total += price;
@@ -288,14 +292,14 @@ function renderCartItems(productMap) {
         `${amount} × ${offer.price}€`,
         `${formatter.format(price)}€`,
         () => {
-          selectedOffers.delete(offer);
+          cartState.selectedOffers.delete(offer);
           renderCartItems(productMap);
         }
       )
     );
   }
 
-  for (const [product, positions] of selectedPositions.entries()) {
+  for (const [product, positions] of cartState.selectedPositions.entries()) {
     for (const pos of positions) {
       total += parseNumber(pos.price);
 
@@ -306,7 +310,7 @@ function renderCartItems(productMap) {
           `${pos.price}€`,
           () => {
             positions.delete(pos);
-            if (positions.size === 0) selectedPositions.delete(product);
+            if (positions.size === 0) cartState.selectedPositions.delete(product);
             renderCartItems(productMap);
           }
         )
@@ -316,7 +320,7 @@ function renderCartItems(productMap) {
 
   let requestSeparatorAdded = false;
 
-  for (const [product, requestText] of selectedRequests.entries()) {
+  for (const [product, requestText] of cartState.selectedRequests.entries()) {
     if (!requestSeparatorAdded) {
       container.appendChild(createRequestSeparator());
       requestSeparatorAdded = true;
@@ -327,7 +331,7 @@ function renderCartItems(productMap) {
         product.name,
         `Anfrage: ${truncate(requestText)}`,
         () => {
-          selectedRequests.delete(product);
+          cartState.selectedRequests.delete(product);
           renderCartItems(productMap);
         }
       )
@@ -385,8 +389,8 @@ function createRequestSeparator() {
 function createEmailClick(overlay, productMap) {
   const name = document.getElementById("customer-name").value;
   const date = document.getElementById("pickup-date").value;
-  const productList = createProductList(productMap);
-  const RequestList = createRequestList()
+  const productList = cartState.createProductList(productMap);
+  const RequestList = cartState.createRequestList()
 
   const body = createMailBody(name, date, productList, RequestList);
   sendTemplateMail(body);

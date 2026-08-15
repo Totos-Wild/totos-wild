@@ -8,5 +8,22 @@ function sendTemplateMail(body) {
 function createMailBody(name, dateInput, productList, requestList) {
   const date = new Date(dateInput);
   const formattedDate = new Intl.DateTimeFormat('de-DE').format(date);
-  return encodeURIComponent(`Hallo Herr Jahn,\n\nich möchte folgende Produkte bestellen:\nAbholungsdatum: ${formattedDate}\n\n${productList}\n\nch möchte folgende Prdukte anfragen:\n${requestList}\nBitte bestätigen sie die Bestellung.\n\nViele Grüße,\n${name}`);
+  
+  const mailBody = 
+`Hallo Herr Jahn,
+
+ich möchte folgende Produkte bestellen:
+Abholungsdatum: ${formattedDate}
+
+${productList || '-'}
+
+ich möchte folgende Produkte anfragen:
+${requestList || '-'}
+
+Bitte bestätigen sie die Bestellung.
+
+Viele Grüße,
+${name}`;
+  
+  return encodeURIComponent(mailBody);
 }

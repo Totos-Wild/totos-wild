@@ -5,6 +5,10 @@
 ## QR Code
 ![QR Code](images/qr-code.png "QR Code")
 
+## Bilder hinzufügen
+1. In GitHub den images ordner anklicken, Datei hinzufügen/Add File anklicken und Bild auswählen
+2. Namen in der Excel Tabelle verwenden
+
 ## TODO
 - E-Mail Automatisierung 
   - cd /pfad/zu/totos-wild-server

@@ -79,6 +79,26 @@
     script.type = "module";
     script.src = "base/main.js?v=" + timestamp;
     document.body.appendChild(script);
+
+    const productPageScript = document.createElement("script");
+    productPageScript.type = "module";
+    productPageScript.src = "products/productPage.js?v=" + timestamp;
+    document.body.appendChild(productPageScript);
+
+    const productCardScript = document.createElement("script");
+    productCardScript.type = "module";
+    productCardScript.src = "products/productCard.js?v=" + timestamp;
+    document.body.appendChild(productCardScript);
+
+    const productRepositoryScript = document.createElement("script");
+    productRepositoryScript.type = "module";
+    productRepositoryScript.src = "products/productRepository.js?v=" + timestamp;
+    document.body.appendChild(productRepositoryScript);
+
+    const productCombinerScript = document.createElement("script");
+    productCombinerScript.type = "module";
+    productCombinerScript.src = "products/productCombiner.js?v=" + timestamp;
+    document.body.appendChild(productCombinerScript);
   </script>
 
 </body>

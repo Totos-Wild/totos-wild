@@ -211,7 +211,7 @@ footer {
   padding: 15px 0px;
   color: var(--color-text-footer);
   font-size: 14px;
-  gap: 20px;
+  gap: 8px;
   border-top: 3px solid var(--color-accent);
   background: var(--color-bg-footer);
 }

@@ -65,11 +65,11 @@
 
     const linkFooter = document.createElement("link");
     linkFooter.rel = "stylesheet";
-    linkFooter.href = "../base/footer.css?v=" + timestamp;
+    linkFooter.href = "../footer/footer.css?v=" + timestamp;
     document.head.appendChild(linkFooter);
 
     const footerScript = document.createElement("script");
-    footerScript.src = "../base/footer.js?v=" + timestamp;
+    footerScript.src = "../footer/footer.js?v=" + timestamp;
     document.body.appendChild(footerScript);
     footerScript.onload = () => insertFooter(false);
   </script>

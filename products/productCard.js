@@ -1,6 +1,6 @@
-import { cartState } from '../logic/cartLogic.js';
-import { showImageOverlay, showPositionSelection, showRequestForm } from './overlay.js';
-import { formatNumber } from '../utils/parse.js';
+import { cartState } from '../cart/cartLogic.js';
+import { showImageOverlay, showPositionSelection, showRequestForm } from '../overlays/overlay.js';
+import { formatNumber } from '../base/utils/parse.js';
 
 export function buildProductCard(product) {
   const div = CreateProductCardDiv(product);
@@ -44,7 +44,7 @@ function createProductContent(product) {
   if (product.imageName) {
     const img = document.createElement("img");
     img.className = "product-img";
-    img.src = `images/${product.imageName}`;
+    img.src = `../images/${product.imageName}`;
     img.alt = product.name;
 
     img.addEventListener("click", () => {

@@ -1,7 +1,7 @@
-import { parseNumber, formatNumber } from '../utils/parse.js';
-import { Offer } from '../dataclasses/offer.js';
-import { Product } from '../dataclasses/product.js';
-import { Position } from '../dataclasses/position.js';
+import { parseNumber, formatNumber } from '../base/utils/parse.js';
+import { Offer } from '../products/dataclasses/offer.js';
+import { Product } from '../products/dataclasses/product.js';
+import { Position } from '../products/dataclasses/position.js';
 
 class CartState {
   constructor() {

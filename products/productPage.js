@@ -1,6 +1,6 @@
-import { loadCategories } from '../logic/dataRepository.js';
+import { loadCategories } from './dataRepository.js';
 import { buildProductCard } from './productCard.js';
-import { showCartForm } from './overlay.js';
+import { showCartForm } from '../overlays/overlay.js';
 
 function renderProductCategories(container, categories) {
   categories.forEach(category => {

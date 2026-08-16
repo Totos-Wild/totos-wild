@@ -28,8 +28,8 @@
   <link rel="canonical" href="https://totos-wild.github.io/totos-wild/">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
   <!-- Optional: als Shortcut Icon für ältere Browser -->
   
   <!--TODO Nach Testen auf versionen wechseln-->
@@ -54,8 +54,8 @@
       <div>Vorbestellung<span class="legend-color no-stock"></span></div>
     </div>
     <div class="footer-links">
-      <a href="impressum.html" class="button-default footer-btn footer-link-btn">Impressum</a>
-      <a href="datenschutz.html" class="button-default footer-btn footer-link-btn">Datenschutz</a>
+      <a href="/legal/impressum.html" class="button-default footer-btn footer-link-btn">Impressum</a>
+      <a href="/legal/datenschutz.html" class="button-default footer-btn footer-link-btn">Datenschutz</a>
     </div>
     <button class="button-default footer-btn" id="cart-btn">
       <img src="images/cart-icon.png" class="cart-icon">
@@ -72,27 +72,27 @@
 
     const linkGeneral = document.createElement("link");
     linkGeneral.rel = "stylesheet";
-    linkGeneral.href = "css/general.css?v=" + timestamp;
+    linkGeneral.href = "base/general.css?v=" + timestamp;
     document.head.appendChild(linkGeneral);
 
     const linkProducts = document.createElement("link");
     linkProducts.rel = "stylesheet";
-    linkProducts.href = "css/products.css?v=" + timestamp;
+    linkProducts.href = "products/products.css?v=" + timestamp;
     document.head.appendChild(linkProducts);
 
     const linkCart = document.createElement("link");
     linkCart.rel = "stylesheet";
-    linkCart.href = "css/cart.css?v=" + timestamp;
+    linkCart.href = "cart/cart.css?v=" + timestamp;
     document.head.appendChild(linkCart);
 
     const linkFooter = document.createElement("link");
     linkFooter.rel = "stylesheet";
-    linkFooter.href = "css/footer.css?v=" + timestamp;
+    linkFooter.href = "base/footer.css?v=" + timestamp;
     document.head.appendChild(linkFooter);
 
     const script = document.createElement("script");
     script.type = "module";
-    script.src = "js/main.js?v=" + timestamp;
+    script.src = "base/main.js?v=" + timestamp;
     document.body.appendChild(script);
   </script>
 

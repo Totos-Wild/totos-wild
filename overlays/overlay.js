@@ -1,6 +1,6 @@
-import { cartState } from '../logic/cartLogic.js';
-import { parseNumber, formatNumber, truncate } from '../utils/parse.js';
-import { createMailBody, sendTemplateMail } from '../logic/mail.js';
+import { cartState } from '../cart/cartLogic.js';
+import { parseNumber, formatNumber, truncate } from '../base/utils/parse.js';
+import { createMailBody, sendTemplateMail } from '../mail/mail.js';
 
 let escHandler;
 

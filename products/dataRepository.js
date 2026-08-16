@@ -1,8 +1,8 @@
 import { loadData } from './fetch.js';
-import { Product } from '../dataclasses/product.js';
-import { Offer } from '../dataclasses/offer.js';
-import { Category } from '../dataclasses/category.js';
-import { Position } from '../dataclasses/position.js';
+import { Product } from './dataclasses/product.js';
+import { Offer } from './dataclasses/offer.js';
+import { Category } from './dataclasses/category.js';
+import { Position } from './dataclasses/position.js';
 import { fillProducts, fillCategoriesWithProducts } from './dataBuilder.js';
 
 export async function loadCategories() {

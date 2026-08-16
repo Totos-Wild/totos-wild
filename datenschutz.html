@@ -98,10 +98,15 @@
   <script>
     const timestamp = new Date().getTime();
 
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "css/style.css?v=" + timestamp;
-    document.head.appendChild(link);
+    const linkGeneral = document.createElement("link");
+    linkGeneral.rel = "stylesheet";
+    linkGeneral.href = "css/general.css?v=" + timestamp;
+    document.head.appendChild(linkGeneral);
+
+    const linkFooter = document.createElement("link");
+    linkFooter.rel = "stylesheet";
+    linkFooter.href = "css/footer.css?v=" + timestamp;
+    document.head.appendChild(linkFooter);
   </script>
 
 </body>

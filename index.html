@@ -70,10 +70,25 @@
     /*TODO Nach Testen löschen*/
     const timestamp = new Date().getTime();
 
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "css/style.css?v=" + timestamp;
-    document.head.appendChild(link);
+    const linkGeneral = document.createElement("link");
+    linkGeneral.rel = "stylesheet";
+    linkGeneral.href = "css/general.css?v=" + timestamp;
+    document.head.appendChild(linkGeneral);
+
+    const linkProducts = document.createElement("link");
+    linkProducts.rel = "stylesheet";
+    linkProducts.href = "css/products.css?v=" + timestamp;
+    document.head.appendChild(linkProducts);
+
+    const linkCart = document.createElement("link");
+    linkCart.rel = "stylesheet";
+    linkCart.href = "css/cart.css?v=" + timestamp;
+    document.head.appendChild(linkCart);
+
+    const linkFooter = document.createElement("link");
+    linkFooter.rel = "stylesheet";
+    linkFooter.href = "css/footer.css?v=" + timestamp;
+    document.head.appendChild(linkFooter);
 
     const script = document.createElement("script");
     script.type = "module";

@@ -1,0 +1,90 @@
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px 0px;
+  color: var(--color-text-footer);
+  font-size: 14px;
+  gap: 8px;
+  border-top: 3px solid var(--color-accent);
+  background: var(--color-bg-footer);
+}
+
+.footer-btn {
+  display: flex;
+  padding: 8px 8px;
+  height: 76px;
+  gap: 6px;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-link-btn {
+  padding: 8px 8px;
+  font-size: 12px;
+  height: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+.product-legend {
+  background-color: var(--color-accent);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px var(--text-shadow-light);
+  height: 60px;
+}
+
+.cart-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.product-legend div {
+  display: flex;
+  margin-bottom: 4px;
+  justify-content: flex-end;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 6px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.legend-color.in-stock {
+  background-color: green;
+}
+
+.legend-color.low-stock {
+  background-color: yellow;
+}
+
+.legend-color.no-stock {
+  background-color: red;
+}
+
+/* ============================= */
+/*        Mobile Optimierung     */
+/* ============================= */
+
+@media (max-width: 600px) {
+  .cart-text {
+    display: none;
+  }
+}

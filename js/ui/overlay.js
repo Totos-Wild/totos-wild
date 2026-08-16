@@ -4,8 +4,6 @@ import { createMailBody, sendTemplateMail } from '../logic/mail.js';
 
 let escHandler;
 
-let escHandler;
-
 export function showImageOverlay(src) {
   const overlay = document.createElement("div");
   overlay.id = "image-overlay";

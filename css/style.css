@@ -235,13 +235,21 @@ footer {
 }
 
 .footer-link-btn {
-  padding: 4px 10px;
-  font-size: 13px;
+  padding: 2px 8px;
+  font-size: 12px;
 }
 
 .cart-btn {
-  padding: 10px 16px;
-  font-size: 15px;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.product-legend {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
 }
 
 .cart-icon {

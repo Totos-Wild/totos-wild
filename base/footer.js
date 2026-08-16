@@ -1,14 +1,15 @@
 const getBasePath = () => {
   const currentPath = window.location.pathname;
-  if (currentPath.includes('/impressum/') || 
-      currentPath.includes('/datenschutz/') || 
-      currentPath.includes('/warenkorb/')) {
-    return '../';
-  }
-  return '';
+  const isInSubfolder = currentPath.includes('/impressum/') || 
+                       currentPath.includes('/datenschutz/') || 
+                       currentPath.includes('/warenkorb/');
+  return isInSubfolder ? '../' : '';
 };
 
-const footerHTML = showLegend => `
+const footerHTML = (showLegend = false) => {
+  const basePath = getBasePath();
+  
+  return `
   <footer>
     ${showLegend ? `
     <div class="product-legend">
@@ -17,25 +18,25 @@ const footerHTML = showLegend => `
       <div>Vorbestellung<span class="legend-color no-stock"></span></div>
     </div>
     ` : ''}
+    
     <div class="footer-links">
-      <a href="${getBasePath()}impressum/" class="button-default footer-btn footer-link-btn">Impressum</a>
-      <a href="${getBasePath()}datenschutz/" class="button-default footer-btn footer-link-btn">Datenschutz</a>
+      <a href="${basePath}impressum/" class="button-default footer-btn footer-link-btn">Impressum</a>
+      <a href="${basePath}datenschutz/" class="button-default footer-btn footer-link-btn">Datenschutz</a>
     </div>
-    <a href="${getBasePath()}" class="button-default footer-btn" id="home-btn">
-      <img src="${getBasePath()}images/haus.png" class="footer-icon">
+    
+    <a href="${basePath}" class="button-default footer-btn" id="home-btn">
+      <img src="${basePath}images/haus.png" class="footer-icon">
       <span class="footer-text">Startseite</span>
     </a>
-    <a href="${getBasePath()}warenkorb/" class="button-default footer-btn" id="cart-btn">
-      <img src="${getBasePath()}images/cart-icon.png" class="footer-icon">
+    
+    <a href="${basePath}warenkorb/" class="button-default footer-btn" id="cart-btn">
+      <img src="${basePath}images/cart-icon.png" class="footer-icon">
       <span class="footer-text">Warenkorb</span>
     </a>
   </footer>
-`;
+  `;
+};
 
 function insertFooter(showLegend = false) {
   document.body.insertAdjacentHTML('beforeend', footerHTML(showLegend));
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { insertFooter };
 }

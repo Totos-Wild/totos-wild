@@ -10,6 +10,7 @@
 2. Namen in der Excel Tabelle verwenden
 
 ## TODO
+- SSR Umstellung
 - E-Mail Automatisierung 
   - cd /pfad/zu/totos-wild-server
   - composer require phpmailer/phpmailer

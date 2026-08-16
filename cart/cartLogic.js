@@ -17,9 +17,9 @@ class CartState {
 
   saveToStorage() {
     const state = {
-      selectedOffers: Array.from(this.selectedOffers.entries()),
-      selectedPositions: Array.from(this.selectedPositions.entries()).map(([product, positions]) => [product, Array.from(positions)]),
-      selectedRequests: Array.from(this.selectedRequests.entries())
+      selectedOffers: Array.from(this.selectedOffers.entries()).map(([offer, amount]) => [JSON.stringify(offer), amount]),
+      selectedPositions: Array.from(this.selectedPositions.entries()).map(([product, positions]) => [JSON.stringify(product), Array.from(positions).map(pos => JSON.stringify(pos))]),
+      selectedRequests: Array.from(this.selectedRequests.entries()).map(([product, request]) => [JSON.stringify(product), request])
     };
     sessionStorage.setItem('cartState', JSON.stringify(state));
   }
@@ -29,9 +29,9 @@ class CartState {
     if (stored) {
       try {
         const state = JSON.parse(stored);
-        this.selectedOffers = new Map(state.selectedOffers);
-        this.selectedPositions = new Map(state.selectedPositions.map(([product, positions]) => [product, new Set(positions)]));
-        this.selectedRequests = new Map(state.selectedRequests);
+        this.selectedOffers = new Map(state.selectedOffers.map(([offerStr, amount]) => [JSON.parse(offerStr), amount]));
+        this.selectedPositions = new Map(state.selectedPositions.map(([productStr, positionsStr]) => [JSON.parse(productStr), new Set(positionsStr.map(posStr => JSON.parse(posStr)))]));
+        this.selectedRequests = new Map(state.selectedRequests.map(([productStr, request]) => [JSON.parse(productStr), request]));
       } catch (e) {
         console.error('Fehler beim Laden des Cart-States:', e);
         this.selectedOffers = new Map();

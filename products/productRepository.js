@@ -6,25 +6,37 @@ import { Position } from './dataclasses/position.js';
 import { fillProducts, fillCategoriesWithProducts } from './productCombiner.js';
 
 export async function loadCategories() {
+  const categoriesRaw = await loadData("Kategorien");
+  return categoriesRaw.map(d => new Category(d));
+}
+
+export async function loadProducts() {
   const productsRaw = await loadData("Produkte");
   const offersRaw = await loadData("Angebote");
   const positionsRaw = await loadData("Positionen");
-  const categoriesRaw = await loadData("Kategorien");
 
   const productsEmpty = productsRaw.map(d => new Product(d));
   const offers = offersRaw.map(d => new Offer(d));
-  const categoriesEmpty = categoriesRaw.map(d => new Category(d));
   const positions = positionsRaw
     .filter(d => d.ProduktID != null && d.ProduktID !== "" && d.Gewicht != null && d.Gewicht !== "")
     .map(d => new Position(d));
 
-
   const products = fillProducts(productsEmpty, offers, positions);
-  const categories = fillCategoriesWithProducts(categoriesEmpty, products);
 
   const productMap = new Map(
     products.map(p => [p.id, p])
   );
 
-  return [categories, productMap];
+  return productMap;
+}
+
+export async function loadAll() {
+  const [categories, productMap] = await Promise.all([
+    loadCategories(),
+    loadProducts()
+  ]);
+
+  const categoriesWithProducts = fillCategoriesWithProducts(categories, productMap);
+
+  return [categoriesWithProducts, productMap];
 }

@@ -1,6 +1,7 @@
 import { cartState } from './cartLogic.js';
 import { parseNumber, formatNumber, truncate } from '../base/utils/parse.js';
 import { createMailBody, sendTemplateMail } from '../mail/mail.js';
+import { loadProducts } from '../products/productRepository.js';
 
 function updateSubmitButtonState() {
   const submitBtn = document.getElementById("submit-order-btn");
@@ -121,7 +122,7 @@ function createRequestSeparator() {
   return sep;
 }
 
-function createEmailClick() {
+function createEmailClick(productMap) {
   const name = document.getElementById("customer-name").value;
   const date = document.getElementById("pickup-date").value;
   const productList = cartState.createProductList(productMap);
@@ -131,31 +132,25 @@ function createEmailClick() {
   sendTemplateMail(body);
 }
 
-export function initializeCartPage() {
-  const productsData = sessionStorage.getItem('productMap');
-  let productMap = new Map();
+export async function initializeCartPage() {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.remove("hidden");
   
-  if (productsData) {
-    try {
-      const productsArray = JSON.parse(productsData);
-      productMap = new Map(productsArray.map(([id, product]) => [id, {
-        ...product,
-        offers: product.offers || [],
-        positions: product.positions || []
-      }]));
-    } catch (e) {
-      console.error('Fehler beim Laden des ProductMaps:', e);
-    }
-  }
+  try {
+    const productMap = await loadProducts();
+    updateSubmitButtonState();
+    renderCartItems(productMap);
 
-  updateSubmitButtonState();
-  renderCartItems(productMap);
-
-  document.getElementById("cart-form")
-    .addEventListener("submit", (e) => {
+    document.getElementById("cart-form").addEventListener("submit", (e) => {
       e.preventDefault();
-      createEmailClick();
+      createEmailClick(productMap);
     });
+  } catch (ex) {
+    document.getElementById("cart-items").innerHTML = "<p>Fehler beim Laden der Produkte</p>";
+    console.error(ex);
+  } finally {
+    if (loader) loader.classList.add("hidden");
+  }
 }
 
 initializeCartPage();

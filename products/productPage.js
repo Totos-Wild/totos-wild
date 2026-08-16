@@ -1,4 +1,4 @@
-import { loadCategories } from './productRepository.js';
+import { loadAll } from './productRepository.js';
 import { buildProductCard } from './productCard.js';
 
 function renderProductCategories(container, categories) {
@@ -27,8 +27,7 @@ export async function initializeProductPage() {
   const container = document.getElementById("product-container");
   
   try {
-    const [categories, productMap] = await loadCategories();
-    sessionStorage.setItem('productMap', JSON.stringify(Array.from(productMap.entries())));
+    const [categories, productMap] = await loadAll();
     renderProductCategories(container, categories);
   } catch (ex) {
     container.innerHTML = "<p>Fehler beim Laden der Produkte</p>";

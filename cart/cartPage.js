@@ -41,8 +41,8 @@ function renderCartItems(productMap) {
       container.appendChild(
         createCartRow(
           `${product.name}`,
-          `${pos.weight} kg`,
-          `${pos.price}€`,
+          `${formatNumber(pos.weight)} kg`,
+          `${formatNumber(pos.price)}€`,
           () => {
             positions.delete(pos);
             if (positions.size === 0) cartState.selectedPositions.delete(product);

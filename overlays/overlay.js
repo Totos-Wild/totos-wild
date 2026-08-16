@@ -61,7 +61,7 @@ export function showPositionSelection(product) {
       <div class="position-list">
         ${product.positions.map((pos, index) => `
           <div class="position-item">
-            <div>Gewicht: ${pos.weight}kg, Preis: ${pos.price}€</div>
+            <div>Gewicht: ${formatNumber(pos.weight)}kg, Preis: ${formatNumber(pos.price)}€</div>
             <button
               class="select-position-btn"
               data-index="${index}">

@@ -134,7 +134,7 @@ function createEmailClick(productMap) {
 
 export async function initializeCartPage() {
   const loader = document.getElementById("loader");
-  if (loader) loader.classList.remove("hidden");
+  loader.classList.remove("hidden");
   
   try {
     const productMap = await loadProducts();
@@ -149,7 +149,7 @@ export async function initializeCartPage() {
     document.getElementById("cart-items").innerHTML = "<p>Fehler beim Laden der Produkte</p>";
     console.error(ex);
   } finally {
-    if (loader) loader.classList.add("hidden");
+    loader.classList.add("hidden");
   }
 }
 

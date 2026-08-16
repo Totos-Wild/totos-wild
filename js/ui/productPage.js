@@ -1,6 +1,6 @@
 import { loadCategories } from '../logic/dataRepository.js';
 import { buildProductCard } from './productCard.js';
-import { showCartForm, showImpressum } from './overlay.js';
+import { showCartForm } from './overlay.js';
 
 function renderProductCategories(container, categories) {
   categories.forEach(category => {
@@ -30,7 +30,6 @@ export async function initializeProductPage() {
   try {
     const [categories, productMap] = await loadCategories();
     document.getElementById("cart-btn").addEventListener("click", () => showCartForm(productMap));
-    document.getElementById("impressum-btn").addEventListener("click", showImpressum);
     renderProductCategories(container, categories);
   } catch (ex) {
     container.innerHTML = "<p>Fehler beim Laden der Produkte</p>";

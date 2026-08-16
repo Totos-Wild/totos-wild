@@ -463,6 +463,35 @@ footer {
   display: none;
 }
 
+.content-text {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 700px;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  border-left: 8px solid var(--color-accent);
+}
+
+.content-text h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.content-text p {
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.content-text a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.content-text a:hover {
+  text-decoration: underline;
+}
+
 /* ============================= */
 /*        Mobile Optimierung     */
 /* ============================= */
@@ -483,5 +512,16 @@ footer {
 
   .cart-text {
     display: none;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .footer-links .footer-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

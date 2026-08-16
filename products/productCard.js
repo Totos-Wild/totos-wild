@@ -101,7 +101,7 @@ function setupOfferButtons(offer, offerDiv) {
   plusBtn.style.backgroundColor = getColor(offer.amount, offer.threshold);
 
   const updateButtonState = () => {
-    const currentAmount = cartState.selectedOffers.get(offer) || 0;
+    const currentAmount = cartState.getOfferAmount(offer);
     countSpan.textContent = currentAmount;
     
     if (currentAmount > 0) {
@@ -114,25 +114,19 @@ function setupOfferButtons(offer, offerDiv) {
   updateButtonState();
 
   plusBtn.addEventListener("click", () => {
-    const currentAmount = cartState.selectedOffers.get(offer) || 0;
+    const currentAmount = cartState.getOfferAmount(offer);
     const newAmount = currentAmount + 1;
-    cartState.selectedOffers.set(offer, newAmount);
+    cartState.setOfferAmount(offer, newAmount);
     updateButtonState();
     cartState.saveToStorage();
   });
 
   minusBtn.addEventListener("click", () => {
-    const currentAmount = cartState.selectedOffers.get(offer) || 0;
+    const currentAmount = cartState.getOfferAmount(offer);
     if (currentAmount <= 0) return;
 
     const newAmount = currentAmount - 1;
-
-    if (newAmount > 0) {
-      cartState.selectedOffers.set(offer, newAmount);
-    } else {
-      cartState.selectedOffers.delete(offer);
-    }
-
+    cartState.setOfferAmount(offer, newAmount);
     updateButtonState();
     cartState.saveToStorage();
   });

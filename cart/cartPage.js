@@ -27,6 +27,7 @@ function renderCartItems(productMap) {
         () => {
           cartState.selectedOffers.delete(offer);
           renderCartItems(productMap);
+          cartState.saveToStorage();
         }
       )
     );
@@ -66,6 +67,7 @@ function renderCartItems(productMap) {
         () => {
           cartState.selectedRequests.delete(product);
           renderCartItems(productMap);
+          cartState.saveToStorage();
         }
       )
     );

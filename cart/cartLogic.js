@@ -41,6 +41,44 @@ class CartState {
     }
   }
 
+  getOfferAmount(offer) {
+    for (const [storedOffer, amount] of this.selectedOffers.entries()) {
+      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+        return amount;
+      }
+    }
+    return 0;
+  }
+
+  setOfferAmount(offer, amount) {
+    for (const [storedOffer] of this.selectedOffers.entries()) {
+      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+        if (amount > 0) {
+          this.selectedOffers.set(storedOffer, amount);
+        } else {
+          this.selectedOffers.delete(storedOffer);
+        }
+        return;
+      }
+    }
+    if (amount > 0) {
+      this.selectedOffers.set({
+        productId: offer.productId,
+        variant: offer.variant,
+        price: offer.price
+      }, amount);
+    }
+  }
+
+  removeOffer(offer) {
+    for (const [storedOffer] of this.selectedOffers.entries()) {
+      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+        this.selectedOffers.delete(storedOffer);
+        return;
+      }
+    }
+  }
+
   createProductList(productMap) {
     let totalOrderPrice = 0;
 

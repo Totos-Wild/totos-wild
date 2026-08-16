@@ -1,0 +1,122 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--shadow-impressum);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-overlay .overlay-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+.overlay-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  margin: 20px auto;
+}
+
+.popup-overlay h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: var(--color-text-dark);
+}
+
+.popup-overlay .close-overlay {
+  margin-top: 20px;
+  padding: 8px 14px;
+  background-color: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.popup-overlay form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.popup-overlay label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.popup-overlay input[type="text"],
+.popup-overlay input[type="date"],
+.popup-overlay textarea {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.popup-overlay textarea {
+  resize: none;
+  height: 100px;
+  background-color: #f7f7f7;
+}
+
+.popup-overlay p {
+  margin: 6px 0;
+}
+
+.popup-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  border-radius: 6px;
+}
+
+.position-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.position-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+}
+
+.select-position-btn {
+  padding: 6px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -91,6 +91,11 @@
     linkGeneral.href = "../base/general.css?v=" + timestamp;
     document.head.appendChild(linkGeneral);
 
+    const linkOverlays = document.createElement("link");
+    linkOverlays.rel = "stylesheet";
+    linkOverlays.href = "../overlays/overlays.css?v=" + timestamp;
+    document.head.appendChild(linkOverlays);
+
     const linkFooter = document.createElement("link");
     linkFooter.rel = "stylesheet";
     linkFooter.href = "../footer/footer.css?v=" + timestamp;

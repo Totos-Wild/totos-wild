@@ -60,6 +60,11 @@
     linkProducts.href = "products/products.css?v=" + timestamp;
     document.head.appendChild(linkProducts);
 
+    const linkOverlays = document.createElement("link");
+    linkOverlays.rel = "stylesheet";
+    linkOverlays.href = "overlays/overlays.css?v=" + timestamp;
+    document.head.appendChild(linkOverlays);
+
     const linkFooter = document.createElement("link");
     linkFooter.rel = "stylesheet";
     linkFooter.href = "footer/footer.css?v=" + timestamp;

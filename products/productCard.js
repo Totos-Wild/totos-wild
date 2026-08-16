@@ -44,7 +44,7 @@ function createProductContent(product) {
   if (product.imageName) {
     const img = document.createElement("img");
     img.className = "product-img";
-    img.src = `../images/${product.imageName}`;
+    img.src = `images/${product.imageName}`;
     img.alt = product.name;
 
     img.addEventListener("click", () => {

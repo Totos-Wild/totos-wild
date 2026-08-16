@@ -131,7 +131,20 @@ function createEmailClick() {
 
 export function initializeCartPage() {
   const productsData = sessionStorage.getItem('productMap');
-  const productMap = productsData ? new Map(JSON.parse(productsData)) : new Map();
+  let productMap = new Map();
+  
+  if (productsData) {
+    try {
+      const productsArray = JSON.parse(productsData);
+      productMap = new Map(productsArray.map(([id, product]) => [id, {
+        ...product,
+        offers: product.offers || [],
+        positions: product.positions || []
+      }]));
+    } catch (e) {
+      console.error('Fehler beim Laden des ProductMaps:', e);
+    }
+  }
 
   updateSubmitButtonState();
   renderCartItems(productMap);

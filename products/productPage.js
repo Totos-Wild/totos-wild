@@ -29,8 +29,15 @@ export async function initializeProductPage() {
   try {
     const [categories, productMap] = await loadCategories();
     
+    const serializableProductMap = Array.from(productMap.entries()).map(([id, product]) => [id, {
+      ...product,
+      offers: product.offers,
+      positions: product.positions
+    }]);
+    
+    sessionStorage.setItem('productMap', JSON.stringify(serializableProductMap));
+    
     document.getElementById("cart-btn").addEventListener("click", () => {
-      sessionStorage.setItem('productMap', JSON.stringify(Array.from(productMap.entries())));
       window.location.href = 'warenkorb/';
     });
     

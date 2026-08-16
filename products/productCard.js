@@ -100,12 +100,24 @@ function setupOfferButtons(offer, offerDiv) {
 
   plusBtn.style.backgroundColor = getColor(offer.amount, offer.threshold);
 
+  const updateButtonState = () => {
+    const currentAmount = cartState.selectedOffers.get(offer) || 0;
+    countSpan.textContent = currentAmount;
+    
+    if (currentAmount > 0) {
+      minusBtn.classList.remove("hidden");
+    } else {
+      minusBtn.classList.add("hidden");
+    }
+  };
+
+  updateButtonState();
+
   plusBtn.addEventListener("click", () => {
     const currentAmount = cartState.selectedOffers.get(offer) || 0;
     const newAmount = currentAmount + 1;
     cartState.selectedOffers.set(offer, newAmount);
-    countSpan.textContent = newAmount;
-    minusBtn.classList.remove("hidden");
+    updateButtonState();
     cartState.saveToStorage();
   });
 
@@ -119,10 +131,9 @@ function setupOfferButtons(offer, offerDiv) {
       cartState.selectedOffers.set(offer, newAmount);
     } else {
       cartState.selectedOffers.delete(offer);
-      minusBtn.classList.add("hidden");
     }
 
-    countSpan.textContent = newAmount;
+    updateButtonState();
     cartState.saveToStorage();
   });
 }

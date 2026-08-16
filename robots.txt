@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://totos-wild.github.io/totos-wild/sitemap.xml

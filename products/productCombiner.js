@@ -14,12 +14,12 @@ export function fillProducts(products, offers, positions) {
   return products;
 }
 
-export function fillCategoriesWithProducts(categories, products) {
+export function fillCategoriesWithProducts(categories, productMap) {
   const categoryMap = new Map(
     categories.map(c => [c.name, c])
   );
 
-  for (const product of products) {
+  for (const product of productMap.values()) {
     const category = categoryMap.get(product.category);
     category.products.push(product);
   }

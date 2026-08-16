@@ -47,6 +47,7 @@ function renderCartItems(productMap) {
             positions.delete(pos);
             if (positions.size === 0) cartState.selectedPositions.delete(product);
             renderCartItems(productMap);
+            cartState.saveToStorage();
           }
         )
       );

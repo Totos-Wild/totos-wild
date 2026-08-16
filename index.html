@@ -69,24 +69,10 @@
     document.body.appendChild(footerScript);
     footerScript.onload = () => insertFooter(true);
 
-    const modules = [
-      "base/main.js",
-      "products/productApi.js",
-      "products/productCard.js",
-      "products/productCombiner.js",
-      "products/productPage.js",
-      "products/productRepository.js",
-      "overlays/overlay.js",
-      "cart/cartLogic.js",
-      "cart/cartRepository.js"
-    ];
-
-    modules.forEach(module => {
-      const script = document.createElement("script");
-      script.type = "module";
-      script.src = module + "?v=" + timestamp;
-      document.body.appendChild(script);
-    });
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "base/main.js?v=" + timestamp;
+    document.body.appendChild(script);
   </script>
 
 </body>

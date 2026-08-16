@@ -68,18 +68,10 @@
     document.body.appendChild(footerScript);
     footerScript.onload = () => insertFooter(false);
 
-    const modules = [
-      "../cart/cartLogic.js",
-      "../cart/cartPage.js",
-      "../cart/cartRepository.js"
-    ];
-
-    modules.forEach(module => {
-      const script = document.createElement("script");
-      script.type = "module";
-      script.src = module + "?v=" + timestamp;
-      document.body.appendChild(script);
-    });
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "../cart/cartPage.js?v=" + timestamp;
+    document.body.appendChild(script);
   </script>
 
 </body>

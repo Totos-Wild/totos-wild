@@ -1,4 +1,4 @@
-import { loadCategories } from './dataRepository.js';
+import { loadCategories } from './productRepository.js';
 import { buildProductCard } from './productCard.js';
 import { showCartForm } from '../overlays/overlay.js';
 

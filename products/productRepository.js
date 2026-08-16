@@ -1,9 +1,9 @@
-import { loadData } from './fetch.js';
+import { loadData } from './productApi.js';
 import { Product } from './dataclasses/product.js';
 import { Offer } from './dataclasses/offer.js';
 import { Category } from './dataclasses/category.js';
 import { Position } from './dataclasses/position.js';
-import { fillProducts, fillCategoriesWithProducts } from './dataBuilder.js';
+import { fillProducts, fillCategoriesWithProducts } from './productCombiner.js';
 
 export async function loadCategories() {
   const productsRaw = await loadData("Produkte");

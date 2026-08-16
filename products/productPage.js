@@ -24,12 +24,13 @@ function renderProductCategories(container, categories) {
 export async function initializeProductPage() {
   const loader = document.getElementById("loader");
   loader.classList.remove("hidden");
+  const container = document.getElementById("product-container");
   
   try {
     const [categories, productMap] = await loadAll();
     renderProductCategories(container, categories);
   } catch (ex) {
-    document.getElementById("product-container").innerHTML = "<p>Fehler beim Laden der Produkte</p>";
+    container.innerHTML = "<p>Fehler beim Laden der Produkte</p>";
     console.error(ex);
   } finally {
     loader.classList.add("hidden");

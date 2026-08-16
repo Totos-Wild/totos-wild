@@ -58,20 +58,18 @@
   <script>
     const timestamp = new Date().getTime();
 
-    const linkGeneral = document.createElement("link");
-    linkGeneral.rel = "stylesheet";
-    linkGeneral.href = "../base/general.css?v=" + timestamp;
-    document.head.appendChild(linkGeneral);
+    const styles = [
+      "../base/general.css",
+      "../overlays/overlays.css",
+      "../footer/footer.css",
+    ];
 
-    const linkOverlays = document.createElement("link");
-    linkOverlays.rel = "stylesheet";
-    linkOverlays.href = "../overlays/overlays.css?v=" + timestamp;
-    document.head.appendChild(linkOverlays);
-
-    const linkFooter = document.createElement("link");
-    linkFooter.rel = "stylesheet";
-    linkFooter.href = "../footer/footer.css?v=" + timestamp;
-    document.head.appendChild(linkFooter);
+    styles.forEach(style => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = style + "?v=" + timestamp;
+      document.head.appendChild(link);
+    });
 
     const footerScript = document.createElement("script");
     footerScript.src = "../footer/footer.js?v=" + timestamp;

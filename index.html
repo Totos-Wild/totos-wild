@@ -50,55 +50,41 @@
   <script>
     const timestamp = new Date().getTime();
 
-    const linkGeneral = document.createElement("link");
-    linkGeneral.rel = "stylesheet";
-    linkGeneral.href = "base/general.css?v=" + timestamp;
-    document.head.appendChild(linkGeneral);
+    const styles = [
+      "base/general.css",
+      "products/products.css",
+      "overlays/overlays.css",
+      "footer/footer.css",
+    ];
 
-    const linkProducts = document.createElement("link");
-    linkProducts.rel = "stylesheet";
-    linkProducts.href = "products/products.css?v=" + timestamp;
-    document.head.appendChild(linkProducts);
-
-    const linkOverlays = document.createElement("link");
-    linkOverlays.rel = "stylesheet";
-    linkOverlays.href = "overlays/overlays.css?v=" + timestamp;
-    document.head.appendChild(linkOverlays);
-
-    const linkFooter = document.createElement("link");
-    linkFooter.rel = "stylesheet";
-    linkFooter.href = "footer/footer.css?v=" + timestamp;
-    document.head.appendChild(linkFooter);
+    styles.forEach(style => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = style + "?v=" + timestamp;
+      document.head.appendChild(link);
+    });
 
     const footerScript = document.createElement("script");
     footerScript.src = "footer/footer.js?v=" + timestamp;
     document.body.appendChild(footerScript);
     footerScript.onload = () => insertFooter(true);
 
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = "base/main.js?v=" + timestamp;
-    document.body.appendChild(script);
+    const modules = [
+      "base/main.js",
+      "products/productApi.js",
+      "products/productCard.js",
+      "products/productCombiner.js",
+      "products/productPage.js",
+      "products/productRepository.js",
+      "overlays/overlay.js",
+    ];
 
-    const productPageScript = document.createElement("script");
-    productPageScript.type = "module";
-    productPageScript.src = "products/productPage.js?v=" + timestamp;
-    document.body.appendChild(productPageScript);
-
-    const productCardScript = document.createElement("script");
-    productCardScript.type = "module";
-    productCardScript.src = "products/productCard.js?v=" + timestamp;
-    document.body.appendChild(productCardScript);
-
-    const productRepositoryScript = document.createElement("script");
-    productRepositoryScript.type = "module";
-    productRepositoryScript.src = "products/productRepository.js?v=" + timestamp;
-    document.body.appendChild(productRepositoryScript);
-
-    const productCombinerScript = document.createElement("script");
-    productCombinerScript.type = "module";
-    productCombinerScript.src = "products/productCombiner.js?v=" + timestamp;
-    document.body.appendChild(productCombinerScript);
+    modules.forEach(module => {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = module + "?v=" + timestamp;
+      document.body.appendChild(script);
+    });
   </script>
 
 </body>

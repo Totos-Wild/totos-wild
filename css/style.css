@@ -221,7 +221,7 @@ footer {
   color: #fff;
   border: none;
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 8px 8px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -229,7 +229,7 @@ footer {
 
 .footer-btn {
   display: flex;
-  padding: 8px 12px;
+  padding: 8px 8px;
   height: 76px;
   gap: 6px;
   align-items: center;
@@ -242,7 +242,7 @@ footer {
 }
 
 .footer-link-btn {
-  padding: 8px 12px;
+  padding: 8px 8px;
   font-size: 12px;
   height: 20px;
   text-align: center;

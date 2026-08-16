@@ -106,6 +106,7 @@ function setupOfferButtons(offer, offerDiv) {
     cartState.selectedOffers.set(offer, newAmount);
     countSpan.textContent = newAmount;
     minusBtn.classList.remove("hidden");
+    cartState.saveToStorage();
   });
 
   minusBtn.addEventListener("click", () => {
@@ -122,6 +123,7 @@ function setupOfferButtons(offer, offerDiv) {
     }
 
     countSpan.textContent = newAmount;
+    cartState.saveToStorage();
   });
 }
 

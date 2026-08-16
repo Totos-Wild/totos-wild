@@ -4,13 +4,41 @@ import { Product } from '../products/dataclasses/product.js';
 import { Position } from '../products/dataclasses/position.js';
 
 class CartState {
+  /** @type {Map<Offer, number>} */
+  selectedOffers = new Map();
+  /** @type {Map<Product, Set<Position>>} */
+  selectedPositions = new Map();
+  /** @type {Map<Product, string>} */
+  selectedRequests = new Map();
+
   constructor() {
-    /** @type {Map<Offer, number>} */
-    this.selectedOffers = new Map();
-    /** @type {Map<Product, Set<Position>>} */
-    this.selectedPositions = new Map();
-    /** @type {Map<Product, string>} */
-    this.selectedRequests = new Map();
+    this.loadFromStorage();
+  }
+
+  saveToStorage() {
+    const state = {
+      selectedOffers: Array.from(this.selectedOffers.entries()),
+      selectedPositions: Array.from(this.selectedPositions.entries()).map(([product, positions]) => [product, Array.from(positions)]),
+      selectedRequests: Array.from(this.selectedRequests.entries())
+    };
+    sessionStorage.setItem('cartState', JSON.stringify(state));
+  }
+
+  loadFromStorage() {
+    const stored = sessionStorage.getItem('cartState');
+    if (stored) {
+      try {
+        const state = JSON.parse(stored);
+        this.selectedOffers = new Map(state.selectedOffers);
+        this.selectedPositions = new Map(state.selectedPositions.map(([product, positions]) => [product, new Set(positions)]));
+        this.selectedRequests = new Map(state.selectedRequests);
+      } catch (e) {
+        console.error('Fehler beim Laden des Cart-States:', e);
+        this.selectedOffers = new Map();
+        this.selectedPositions = new Map();
+        this.selectedRequests = new Map();
+      }
+    }
   }
 
   createProductList(productMap) {
@@ -62,6 +90,7 @@ class CartState {
         this.selectedRequests.delete(product);
       }
     }
+    this.saveToStorage();
   }
 
   isSelectionEmpty() {
@@ -86,6 +115,7 @@ class CartState {
     } else {
       set.add(position);
     }
+    this.saveToStorage();
   }
 }
 

@@ -23,7 +23,7 @@ function renderCartItems(productMap) {
     container.appendChild(
       createCartRow(
         `${product.name} (${offer.variant})`,
-        `${amount} × ${offer.price}€`,
+        `${amount} × ${formatNumber(offer.price)}€`,
         `${formatNumber(price)}€`,
         () => {
           cartState.selectedOffers.delete(offer);

@@ -525,15 +525,4 @@ footer {
   .cart-text {
     display: none;
   }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .footer-links .footer-btn {
-    width: 100%;
-    justify-content: center;
-  }
 }

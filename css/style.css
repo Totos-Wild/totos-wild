@@ -245,6 +245,8 @@ footer {
   padding: 8px 12px;
   font-size: 12px;
   height: 20px;
+  text-align: center;
+  justify-content: center;
 }
 
 .product-legend {

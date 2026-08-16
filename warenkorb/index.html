@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Warenkorb - Toto's Wild- u. Honigspezialitäten</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO Metadaten -->
+  <meta name="description" content="Warenkorb von Toto's Wild- u. Honigspezialitäten - Ihre Auswahl an regionalen Honig- und Wildprodukten.">
+  <meta name="author" content="Thorsten Jahn">
+  <meta name="robots" content="noindex, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://totos-wild.github.io/totos-wild/warenkorb/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+</head>
+
+<body>
+
+  <header>
+    <h1>Toto's Wild- u. Honigspezialitäten</h1>
+  </header>
+
+  <main class="wrapper">
+    <div class="cart-content">
+      <h2>Bestellung aufgeben</h2>
+      <form id="cart-form">
+        <label>Abholungsdatum:</label>
+        <input type="date" id="pickup-date" required>
+
+        <label>Name:</label>
+        <input type="text" id="customer-name" placeholder="Dein Name" required>
+
+        <label>Warenkorb:</label>
+        <div id="cart-items" class="cart-items"></div>
+
+        <div id="cart-total" class="cart-total"></div>
+
+        <button type="submit" id="submit-order-btn" class="button-default">Email erstellen</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const timestamp = new Date().getTime();
+
+    const linkGeneral = document.createElement("link");
+    linkGeneral.rel = "stylesheet";
+    linkGeneral.href = "../base/general.css?v=" + timestamp;
+    document.head.appendChild(linkGeneral);
+
+    const linkCart = document.createElement("link");
+    linkCart.rel = "stylesheet";
+    linkCart.href = "../cart/cart.css?v=" + timestamp;
+    document.head.appendChild(linkCart);
+
+    const linkFooter = document.createElement("link");
+    linkFooter.rel = "stylesheet";
+    linkFooter.href = "../base/footer.css?v=" + timestamp;
+    document.head.appendChild(linkFooter);
+
+    const footerScript = document.createElement("script");
+    footerScript.src = "../base/footer.js?v=" + timestamp;
+    document.body.appendChild(footerScript);
+    footerScript.onload = () => insertFooter(false);
+
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "../cart/cartPage.js?v=" + timestamp;
+    document.body.appendChild(script);
+  </script>
+
+</body>
+
+</html>

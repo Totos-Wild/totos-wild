@@ -17,7 +17,7 @@ footer {
 .footer-btn {
   display: flex;
   padding: 8px 8px;
-  height: 76px;
+  height: 60px;
   gap: 6px;
   align-items: center;
 }
@@ -46,7 +46,7 @@ footer {
   height: 60px;
 }
 
-.cart-icon {
+.footer-icon {
   width: 40px;
   height: 40px;
 }
@@ -84,7 +84,7 @@ footer {
 /* ============================= */
 
 @media (max-width: 600px) {
-  .cart-text {
+  .footer-text {
     display: none;
   }
 }

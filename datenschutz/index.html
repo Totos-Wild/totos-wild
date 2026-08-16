@@ -83,13 +83,6 @@
     </div>
   </main>
 
-  <footer>
-    <div class="footer-links">
-      <a href="../" class="button-default footer-btn footer-link-btn">Startseite</a>
-      <a href="../impressum/" class="button-default footer-btn footer-link-btn">Impressum</a>
-    </div>
-  </footer>
-
   <script>
     const timestamp = new Date().getTime();
 
@@ -102,6 +95,11 @@
     linkFooter.rel = "stylesheet";
     linkFooter.href = "../base/footer.css?v=" + timestamp;
     document.head.appendChild(linkFooter);
+
+    const footerScript = document.createElement("script");
+    footerScript.src = "../base/footer.js?v=" + timestamp;
+    document.body.appendChild(footerScript);
+    footerScript.onload = () => insertFooter(false);
   </script>
 
 </body>

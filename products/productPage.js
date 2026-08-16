@@ -1,6 +1,5 @@
 import { loadCategories } from './productRepository.js';
 import { buildProductCard } from './productCard.js';
-import { showCartForm } from '../overlays/overlay.js';
 
 function renderProductCategories(container, categories) {
   categories.forEach(category => {
@@ -29,7 +28,12 @@ export async function initializeProductPage() {
   
   try {
     const [categories, productMap] = await loadCategories();
-    document.getElementById("cart-btn").addEventListener("click", () => showCartForm(productMap));
+    
+    document.getElementById("cart-btn").addEventListener("click", () => {
+      sessionStorage.setItem('productMap', JSON.stringify(Array.from(productMap.entries())));
+      window.location.href = 'warenkorb/';
+    });
+    
     renderProductCategories(container, categories);
   } catch (ex) {
     container.innerHTML = "<p>Fehler beim Laden der Produkte</p>";

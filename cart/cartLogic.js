@@ -69,14 +69,14 @@ class CartState {
         const totalPrice = parseNumber(offer.price) * amount;
         totalOrderPrice += totalPrice;
 
-        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amount}x${offer.price}€ = ${formatNumber(totalPrice)}€`;
+        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amount}x${formatNumber(offer.price)}€ = ${formatNumber(totalPrice)}€`;
       });
 
     const positionLines = Array.from(this.selectedPositions.entries())
       .flatMap(([product, positions]) => Array.from(positions).map(pos => {
         totalOrderPrice += parseNumber(pos.price);
 
-        return `${product.name} (${pos.weight}kg): ${pos.price}€`;
+        return `${product.name} (${formatNumber(pos.weight)}kg): ${formatNumber(pos.price)}€`;
       }));
 
     let productList = [...offerLines, ...positionLines]

@@ -17,7 +17,7 @@ export async function sendOrder(name, date, products, requests) {
   });
 
   if (!response.ok) {
-    console.error(response.json());
+    console.error(await response.text());
     throw new Error("Server Fehler");
   }
 }

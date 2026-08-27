@@ -119,6 +119,13 @@ class CartState {
       this.selectedRequests.size === 0;
   }
 
+  clear() {
+    this.selectedOffers.clear();
+    this.selectedPositions.clear();
+    this.selectedRequests.clear();
+    this.saveToStorage();
+  }
+
   togglePositionSelection(product, position) {
     if (!this.selectedPositions.has(product)) {
       this.selectedPositions.set(product, new Set());

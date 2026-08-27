@@ -1,4 +1,3 @@
-import { parseNumber, formatNumber } from '../base/utils/parse.js';
 import { Offer } from '../products/dataclasses/offer.js';
 import { Product } from '../products/dataclasses/product.js';
 import { Position } from '../products/dataclasses/position.js';
@@ -25,7 +24,7 @@ class CartState {
 
   getOfferAmount(offer) {
     for (const [storedOffer, amountSelected] of this.selectedOffers.entries()) {
-      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+      if (storedOffer.productId === offer.productId && storedOffer.posId === offer.posId) {
         return amountSelected;
       }
     }
@@ -34,7 +33,7 @@ class CartState {
 
   setOfferAmount(offer, amountSelected) {
     for (const [storedOffer] of this.selectedOffers.entries()) {
-      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+      if (storedOffer.productId === offer.productId && storedOffer.posId === offer.posId) {
         if (amountSelected > 0) {
           this.selectedOffers.set(storedOffer, amountSelected);
         } else {
@@ -44,17 +43,13 @@ class CartState {
       }
     }
     if (amountSelected > 0) {
-      this.selectedOffers.set({
-        productId: offer.productId,
-        variant: offer.variant,
-        price: offer.price
-      }, amountSelected);
+      this.selectedOffers.set(offer, amountSelected);
     }
   }
 
   removeOffer(offer) {
     for (const [storedOffer] of this.selectedOffers.entries()) {
-      if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
+      if (storedOffer.productId === offer.productId && storedOffer.posId === offer.posId) {
         this.selectedOffers.delete(storedOffer);
         return;
       }
@@ -68,7 +63,6 @@ class CartState {
       products.push({
         productId: offer.productId,
         posId: offer.posId,
-        variant: offer.variant,
         amount: amountSelected,
         price: offer.price,
         name: productMap.get(offer.productId).name,

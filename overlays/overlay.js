@@ -1,6 +1,5 @@
 import { cartState } from '../cart/cartLogic.js';
-import { parseNumber, formatNumber, truncate } from '../base/utils/parse.js';
-import { createMailBody, sendTemplateMail } from '../mail/mail.js';
+import { formatNumber } from '../base/utils/parse.js';
 
 let escHandler;
 

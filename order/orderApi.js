@@ -17,9 +17,21 @@ export async function sendOrder(name, date, productList, requestList) {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const responseText = await response.text();
+    console.error('Server error response:', responseText);
+    let errorData;
+    try {
+      errorData = JSON.parse(responseText);
+    } catch (e) {
+      throw new Error('Server returned non-JSON error: ' + responseText);
+    }
     throw new Error(errorData.error || 'Fehler beim Senden der Bestellung');
   }
 
-  return await response.json();
+  const responseText = await response.text();
+  try {
+    return JSON.parse(responseText);
+  } catch (e) {
+    throw new Error('Server returned non-JSON response: ' + responseText);
+  }
 }

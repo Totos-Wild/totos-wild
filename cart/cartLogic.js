@@ -24,31 +24,31 @@ class CartState {
   }
 
   getOfferAmount(offer) {
-    for (const [storedOffer, amount] of this.selectedOffers.entries()) {
+    for (const [storedOffer, amountSelected] of this.selectedOffers.entries()) {
       if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
-        return amount;
+        return amountSelected;
       }
     }
     return 0;
   }
 
-  setOfferAmount(offer, amount) {
+  setOfferAmount(offer, amountSelected) {
     for (const [storedOffer] of this.selectedOffers.entries()) {
       if (storedOffer.productId === offer.productId && storedOffer.variant === offer.variant) {
-        if (amount > 0) {
-          this.selectedOffers.set(storedOffer, amount);
+        if (amountSelected > 0) {
+          this.selectedOffers.set(storedOffer, amountSelected);
         } else {
           this.selectedOffers.delete(storedOffer);
         }
         return;
       }
     }
-    if (amount > 0) {
+    if (amountSelected > 0) {
       this.selectedOffers.set({
         productId: offer.productId,
         variant: offer.variant,
         price: offer.price
-      }, amount);
+      }, amountSelected);
     }
   }
 
@@ -65,11 +65,11 @@ class CartState {
     let totalOrderPrice = 0;
 
     const offerLines = Array.from(this.selectedOffers.entries())
-      .map(([offer, amount]) => {
-        const totalPrice = parseNumber(offer.price) * amount;
+      .map(([offer, amountSelected]) => {
+        const totalPrice = parseNumber(offer.price) * amountSelected;
         totalOrderPrice += totalPrice;
 
-        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amount}x${formatNumber(offer.price)}€ = ${formatNumber(totalPrice)}€`;
+        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amountSelected}x${formatNumber(offer.price)}€ = ${formatNumber(totalPrice)}€`;
       });
 
     const positionLines = Array.from(this.selectedPositions.entries())

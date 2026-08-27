@@ -2,7 +2,7 @@ const STORAGE_KEY = 'cartState';
 
 export function saveCartState(cartState) {
   const state = {
-    selectedOffers: Array.from(cartState.selectedOffers.entries()).map(([offer, amount]) => [JSON.stringify(offer), amount]),
+    selectedOffers: Array.from(cartState.selectedOffers.entries()).map(([offer, amountSelected]) => [JSON.stringify(offer), amountSelected]),
     selectedPositions: Array.from(cartState.selectedPositions.entries()).map(([product, positions]) => [JSON.stringify(product), Array.from(positions).map(pos => JSON.stringify(pos))]),
     selectedRequests: Array.from(cartState.selectedRequests.entries()).map(([product, request]) => [JSON.stringify(product), request])
   };
@@ -15,7 +15,7 @@ export function loadCartState() {
     try {
       const state = JSON.parse(stored);
       return {
-        selectedOffers: new Map(state.selectedOffers.map(([offerStr, amount]) => [JSON.parse(offerStr), amount])),
+        selectedOffers: new Map(state.selectedOffers.map(([offerStr, amountSelected]) => [JSON.parse(offerStr), amountSelected])),
         selectedPositions: new Map(state.selectedPositions.map(([productStr, positionsStr]) => [JSON.parse(productStr), new Set(positionsStr.map(posStr => JSON.parse(posStr)))])),
         selectedRequests: new Map(state.selectedRequests.map(([productStr, request]) => [JSON.parse(productStr), request]))
       };

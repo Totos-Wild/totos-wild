@@ -8,13 +8,19 @@ export class Offer {
   /** @type {number} */
   amount;
   /** @type {number} */
-  threshold;
+  amountThreshold;
+  /** @type {number} */
+  amountOrdered;
+  /** @type {number} */
+  amountAvailable;
 
   constructor(data) {
     this.productId = data.ProduktID;
     this.variant = data.Variante;
     this.price = data.Preis;
     this.amount = data.Anzahl;
-    this.threshold = data.Schwellwert;
+    this.amountThreshold = data.Schwellwert;
+    this.amountOrdered = data.Bestellt;
+    this.amountAvailable = this.amount - this.amountOrdered;
   }
 }

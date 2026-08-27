@@ -15,15 +15,15 @@ function renderCartItems(productMap) {
   container.innerHTML = "";
   let total = 0;
 
-  for (const [offer, amount] of cartState.selectedOffers.entries()) {
+  for (const [offer, amountSelected] of cartState.selectedOffers.entries()) {
     const product = productMap.get(offer.productId);
-    const price = parseNumber(offer.price) * amount;
+    const price = parseNumber(offer.price) * amountSelected;
     total += price;
 
     container.appendChild(
       createCartRow(
         `${product.name} (${offer.variant})`,
-        `${amount} × ${formatNumber(offer.price)}€`,
+        `${amountSelected} × ${formatNumber(offer.price)}€`,
         `${formatNumber(price)}€`,
         () => {
           cartState.selectedOffers.delete(offer);

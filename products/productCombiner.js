@@ -1,3 +1,5 @@
+import { PositionStatus } from './dataclasses/position.js';
+
 export function fillProducts(products, offers, positions) {
   const productMap = new Map(products.map(p => [p.id, p]));
 
@@ -7,6 +9,7 @@ export function fillProducts(products, offers, positions) {
   }
 
   for (const position of positions) {
+    if (position.status === PositionStatus.ORDERED) continue;
     const product = productMap.get(position.productId);
     if (product) product.positions.push(position);
   }

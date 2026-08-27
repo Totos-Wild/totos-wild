@@ -19,11 +19,11 @@ function CreateProductCardDiv(product) {
   return div;
 }
 
-function getColor(amount, threshold) {
-  if (amount >= threshold) {
+function getColor(amountAvailable, amountThreshold) {
+  if (amountAvailable >= amountThreshold) {
     return "green";
   }
-  else if (amount > 0) {
+  else if (amountAvailable > 0) {
     return "yellow";
   }
   else {
@@ -98,7 +98,7 @@ function setupOfferButtons(offer, offerDiv) {
   const minusBtn = offerDiv.querySelector(".minus-btn");
   const countSpan = offerDiv.querySelector(".offer-count");
 
-  plusBtn.style.backgroundColor = getColor(offer.amount, offer.threshold);
+  plusBtn.style.backgroundColor = getColor(offer.amountAvailable, offer.amountThreshold);
 
   const updateButtonState = () => {
     const currentAmount = cartState.getOfferAmount(offer);

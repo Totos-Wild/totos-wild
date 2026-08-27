@@ -126,13 +126,14 @@ function createRequestSeparator() {
 async function createEmailClick(productMap) {
   const name = document.getElementById("customer-name").value;
   const date = document.getElementById("pickup-date").value;
-  const productList = cartState.createProductList(productMap);
-  const requestList = cartState.createRequestList();
+  const products = cartState.createProductData(productMap);  
+  const requests = cartState.createRequestData();
 
   try {
-    await sendOrder(name, date, productList, requestList);
+    await sendOrder(name, date, products, requests);
     alert('Bestellung erfolgreich gesendet!');
     cartState.clear();
+    //TODO andere felder clearen
     renderCartItems(productMap);
   } catch (error) {
     alert('Fehler beim Senden der Bestellung: ' + error.message);

@@ -1,6 +1,6 @@
 import { SERVER_URL } from '../base/config.js';
 
-export async function sendOrder(name, date, productList, requestList) {
+export async function sendOrder(name, date, products, requests) {
   const orderPfad = "create-order.php";
   
   const response = await fetch(`${SERVER_URL}${orderPfad}`, {
@@ -11,8 +11,8 @@ export async function sendOrder(name, date, productList, requestList) {
     body: JSON.stringify({
       name,
       date,
-      productList,
-      requestList
+      products,
+      requests
     })
   });
 

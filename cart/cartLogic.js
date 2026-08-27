@@ -61,44 +61,33 @@ class CartState {
     }
   }
 
-  createProductList(productMap) {
-    let totalOrderPrice = 0;
+  createProductData(productMap) {
+    const products = [];
 
-    const offerLines = Array.from(this.selectedOffers.entries())
-      .map(([offer, amountSelected]) => {
-        const totalPrice = parseNumber(offer.price) * amountSelected;
-        totalOrderPrice += totalPrice;
-
-        return `${productMap.get(offer.productId).name} (${offer.variant}): ${amountSelected}x${formatNumber(offer.price)}€ = ${formatNumber(totalPrice)}€`;
+    for (const [offer, amountSelected] of this.selectedOffers.entries()) {
+      products.push({
+        productId: offer.productId,
+        variant: offer.variant,
+        amount: amountSelected,
+        price: offer.price,
+        name: productMap.get(offer.productId).name,
       });
-
-    const positionLines = Array.from(this.selectedPositions.entries())
-      .flatMap(([product, positions]) => Array.from(positions).map(pos => {
-        totalOrderPrice += parseNumber(pos.price);
-
-        return `${product.name} (${formatNumber(pos.weight)}kg): ${formatNumber(pos.price)}€`;
-      }));
-
-    let productList = [...offerLines, ...positionLines]
-      .join("\n")
-      .trim();
-
-    const noProducts = productList === "";
-
-    if (noProducts) {
-      productList = "Keine Produkte ausgewählt.";
-    } else {
-      productList += `\n\nGesamtpreis: ${formatNumber(totalOrderPrice)}€`;
     }
 
-    return productList;
+    return products;
   }
 
-  createRequestList() {
-    return Array.from(this.selectedRequests.entries())
-      .map(([product, request]) => {
-        return `${product.name}: ${request}`;
+  createRequestData() {
+    const requests = [];
+
+    for (const [product, request] of this.selectedRequests.entries()) {
+      requests.push({
+        name: product.name,
+        text: request,
       });
+    }
+
+    return requests;
   }
 
   saveRequestText(requestText, product) {

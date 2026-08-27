@@ -56,11 +56,11 @@ class CartState {
     }
   }
 
-  createProductData(productMap) {
-    const products = [];
+  createOfferData(productMap) {
+    const offers = [];
 
     for (const [offer, amountSelected] of this.selectedOffers.entries()) {
-      products.push({
+      offers.push({
         productId: offer.productId,
         posId: offer.posId,
         amount: amountSelected,
@@ -69,7 +69,25 @@ class CartState {
       });
     }
 
-    return products;
+    return offers;
+  }
+
+  createPositionData() {
+    const positions = [];
+
+    for (const [product, positionSet] of this.selectedPositions.entries()) {
+      for (const position of positionSet) {
+        positions.push({
+          positionId: position.Id,
+          productId: position.productId,
+          name: product.name,
+          price: position.price,
+          weight: position.weight,
+        });
+      }
+    }
+
+    return positions;
   }
 
   createRequestData() {

@@ -129,13 +129,14 @@ async function sendOrderClick(productMap) {
     const loader = document.getElementById("loader");
     const name = document.getElementById("customer-name").value;
     const date = document.getElementById("pickup-date").value;
-    const products = cartState.createProductData(productMap);  
+    const selectedOffers = cartState.createOfferData(productMap);
+    const selectedPositions = cartState.createPositionData();
     const requests = cartState.createRequestData();
 
     form.disabled = true;
     loader.classList.remove("hidden");
 
-    await sendOrder(name, date, products, requests);
+    await sendOrder(name, date, selectedOffers, selectedPositions, requests);
     
     alert('Bestellung erfolgreich gesendet!');
     cartState.clear();
@@ -146,7 +147,7 @@ async function sendOrderClick(productMap) {
     window.location.href = "../index.html";
   } catch (error) {
     alert('Fehler beim Senden der Bestellung: ' + error.message);
-  } finaly {
+  } finally {
     form.disabled = false;
     loader.classList.add("hidden");
   }

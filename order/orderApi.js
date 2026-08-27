@@ -17,9 +17,7 @@ export async function sendOrder(name, date, products, requests) {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Fehler beim Senden der Bestellung');
+    console.error(response.json());
+    throw new Error("Server Fehler");
   }
-
-  return await response.json();
 }

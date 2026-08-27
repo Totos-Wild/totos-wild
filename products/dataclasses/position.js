@@ -5,6 +5,8 @@ export const PositionStatus = {
 
 export class Position {
   /** @type {number} */
+  Id;
+  /** @type {number} */
   productId;
   /** @type {string} */
   weight;
@@ -14,6 +16,7 @@ export class Position {
   status;
 
   constructor(data) {
+    this.Id = data.ID;
     this.productId = data.ProduktID;
     this.weight = data.Gewicht;
     this.price = data.Preis;

@@ -67,6 +67,7 @@ class CartState {
     for (const [offer, amountSelected] of this.selectedOffers.entries()) {
       products.push({
         productId: offer.productId,
+        posId: offer.posId,
         variant: offer.variant,
         amount: amountSelected,
         price: offer.price,

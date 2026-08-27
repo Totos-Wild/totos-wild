@@ -1,6 +1,8 @@
 export class Offer {
   /** @type {number} */
   productId;
+  /** @type {number} */
+  posId;
   /** @type {string} */
   variant;
   /** @type {string} */
@@ -16,6 +18,7 @@ export class Offer {
 
   constructor(data) {
     this.productId = data.ProduktID;
+    this.posId = data.PosID
     this.variant = data.Variante;
     this.price = data.Preis;
     this.amount = data.Anzahl;

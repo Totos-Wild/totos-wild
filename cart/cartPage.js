@@ -123,20 +123,32 @@ function createRequestSeparator() {
   return sep;
 }
 
-async function createEmailClick(productMap) {
-  const name = document.getElementById("customer-name").value;
-  const date = document.getElementById("pickup-date").value;
-  const products = cartState.createProductData(productMap);  
-  const requests = cartState.createRequestData();
-
+async function sendOrderClick(productMap) {
   try {
+    const form = document.getElementById("cart-form");
+    const loader = document.getElementById("loader");
+    const name = document.getElementById("customer-name").value;
+    const date = document.getElementById("pickup-date").value;
+    const products = cartState.createProductData(productMap);  
+    const requests = cartState.createRequestData();
+
+    form.disabled = true;
+    loader.classList.remove("hidden");
+
     await sendOrder(name, date, products, requests);
+    
     alert('Bestellung erfolgreich gesendet!');
     cartState.clear();
-    //TODO andere felder clearen
+    document.getElementById("customer-name").value = "";
+    document.getElementById("pickup-date").value = "";
     renderCartItems(productMap);
+    
+    window.location.href = "../index.html";
   } catch (error) {
     alert('Fehler beim Senden der Bestellung: ' + error.message);
+  } finaly {
+    form.disabled = false;
+    loader.classList.add("hidden");
   }
 }
 
@@ -151,7 +163,7 @@ export async function initializeCartPage() {
 
     document.getElementById("cart-form").addEventListener("submit", (e) => {
       e.preventDefault();
-      createEmailClick(productMap);
+      sendOrderClick(productMap);
     });
   } catch (ex) {
     document.getElementById("cart-items").innerHTML = "<p>Fehler beim Laden der Produkte</p>";

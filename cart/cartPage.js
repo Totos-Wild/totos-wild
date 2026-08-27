@@ -1,6 +1,6 @@
 import { cartState } from './cartLogic.js';
 import { parseNumber, formatNumber, truncate } from '../base/utils/parse.js';
-import { createMailBody, sendTemplateMail } from '../mail/mail.js';
+import { sendOrder } from '../order/orderApi.js';
 import { loadProducts } from '../products/productRepository.js';
 
 function updateSubmitButtonState() {
@@ -123,14 +123,20 @@ function createRequestSeparator() {
   return sep;
 }
 
-function createEmailClick(productMap) {
+async function createEmailClick(productMap) {
   const name = document.getElementById("customer-name").value;
   const date = document.getElementById("pickup-date").value;
   const productList = cartState.createProductList(productMap);
-  const RequestList = cartState.createRequestList();
+  const requestList = cartState.createRequestList();
 
-  const body = createMailBody(name, date, productList, RequestList);
-  sendTemplateMail(body);
+  try {
+    await sendOrder(name, date, productList, requestList);
+    alert('Bestellung erfolgreich gesendet!');
+    cartState.clear();
+    renderCartItems(productMap);
+  } catch (error) {
+    alert('Fehler beim Senden der Bestellung: ' + error.message);
+  }
 }
 
 export async function initializeCartPage() {

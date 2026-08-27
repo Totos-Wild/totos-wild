@@ -1,7 +1,8 @@
+import { SERVER_URL } from '../base/config.js';
+
 export async function loadData(typ) {
-  const piUrl = "https://www-totos-wild-und-honig-de.k2x1vmwia2xhdx8w.myfritz.net";
-  const produktePfad = "/totos-wild-server/produkte.php";
-  const response = await fetch(`${piUrl}${produktePfad}?typ=${encodeURIComponent(typ)}`);
+  const produktePfad = "produkte.php";
+  const response = await fetch(`${SERVER_URL}${produktePfad}?typ=${encodeURIComponent(typ)}`);
   const daten = await response.json();
   return daten;
 }

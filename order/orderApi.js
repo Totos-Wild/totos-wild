@@ -1,0 +1,25 @@
+import { SERVER_URL } from '../base/config.js';
+
+export async function sendOrder(name, date, productList, requestList) {
+  const orderPfad = "create-order.php";
+  
+  const response = await fetch(`${SERVER_URL}${orderPfad}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      date,
+      productList,
+      requestList
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Fehler beim Senden der Bestellung');
+  }
+
+  return await response.json();
+}

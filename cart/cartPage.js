@@ -8,6 +8,13 @@ function updateSubmitButtonState() {
   submitBtn.disabled = cartState.isSelectionEmpty();
 }
 
+function setFormDisabled(form, disabled) {
+  const formElements = form.querySelectorAll("input, button");
+  formElements.forEach((element) => {
+    element.disabled = disabled;
+  });
+}
+
 function renderCartItems(productMap) {
   const container = document.getElementById("cart-items");
   const totalDiv = document.getElementById("cart-total");
@@ -133,7 +140,7 @@ async function sendOrderClick(productMap) {
     const selectedPositions = cartState.createPositionData();
     const requests = cartState.createRequestData();
 
-    form.disabled = true;
+    setFormDisabled(form, true);
     loader.classList.remove("hidden");
 
     await sendOrder(name, date, selectedOffers, selectedPositions, requests);
@@ -148,7 +155,7 @@ async function sendOrderClick(productMap) {
   } catch (error) {
     alert('Fehler beim Senden der Bestellung: ' + error.message);
   } finally {
-    form.disabled = false;
+    setFormDisabled(form, false);
     loader.classList.add("hidden");
   }
 }

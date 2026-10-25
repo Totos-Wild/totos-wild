@@ -38,6 +38,15 @@
 
 <body>
 
+  <div id="age-modal" class="modal">
+    <div class="modal-content">
+      <p>Diese Website ist nur für Freunde und Bekannte</p>
+      <div class="modal-buttons">
+        <button id="modal-ok" class="modal-button modal-button-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
   <header>
     <h1>Toto's Wild- u. Honigspezialitäten</h1>
   </header>
@@ -46,6 +55,25 @@
     <div id="loader" class="loader"></div>
     <div id="product-container"></div>
   </main>
+
+  <script>
+    const ageModal = document.getElementById("age-modal");
+    const modalOk = document.getElementById("modal-ok");
+
+    function checkModal() {
+      const hasSeenModal = localStorage.getItem("hasSeenAgeModal");
+      if (!hasSeenModal) {
+        ageModal.style.display = "flex";
+      }
+    }
+
+    modalOk.addEventListener("click", () => {
+      localStorage.setItem("hasSeenAgeModal", "true");
+      ageModal.style.display = "none";
+    });
+
+    checkModal();
+  </script>
 
   <script>
     const timestamp = new Date().getTime();

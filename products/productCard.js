@@ -153,6 +153,7 @@ function createPositionSelectorButton(product) {
 
   if (hasSelections) {
     button.textContent = "Auswählen";
+    button.style.backgroundColor = "green";
     button.addEventListener("click", () => showPositionSelection(product));
   } else {
     button.textContent = "Anfrage";
